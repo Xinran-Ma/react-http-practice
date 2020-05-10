@@ -27,7 +27,7 @@ class Blog extends Component {
                 this.setState({posts: updatedPosts});
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
                 this.setState({error: true})
             });
     }

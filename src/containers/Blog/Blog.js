@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Posts from './Posts/Posts'
-import FullPost from './FullPost/FullPost'
 import './Blog.css';
 import { Route, NavLink, Switch } from 'react-router-dom'
 import NewPost from './NewPost/NewPost'
@@ -14,13 +13,13 @@ class Blog extends Component {
                         <ul>
                             <li>
                                 <NavLink 
-                                    to="/" 
+                                    to="/posts" 
                                     exact
                                     activeClassName="my-active"
                                     activeStyle={{
-                                        color: '$fa923f',
+                                        color: '#fa923f',
                                         textDecoration: 'underline'
-                                    }}>Home</NavLink>
+                                    }}>Posts</NavLink>
                             </li>
                             <li>
                                 <NavLink to={{
@@ -34,10 +33,9 @@ class Blog extends Component {
                 </header>
                 {/* <Route path="/" exact render={() => <h1>Home</h1>} /> */}
                 {/* Order of the routes is important in the below code. This is because the id in /:id can be same with 'new-post'. */}
-                <Route path="/" exact component={Posts} />
                 <Switch>
                     <Route path="/new-post" exact component={NewPost} />
-                    <Route path="/:id" exact component={FullPost} />
+                    <Route path="/posts" component={Posts} />
                 </Switch>
             </div>
         );

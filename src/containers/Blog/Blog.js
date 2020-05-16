@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import Posts from './Posts/Posts'
 import './Blog.css';
 import { Route, NavLink, Switch, Redirect } from 'react-router-dom'
-import NewPost from './NewPost/NewPost'
+// import NewPost from './NewPost/NewPost'
+import asyncComponent from '../../hoc/asyncComponent'
+const AsyncNewPost = asyncComponent(() => {
+    return import('./NewPost/NewPost')
+})
+
 
 class Blog extends Component {
     state = {
-        auth: false
+        auth: true
     }
     render () {
         return (
@@ -37,8 +42,9 @@ class Blog extends Component {
                 {/* <Route path="/" exact render={() => <h1>Home</h1>} /> */}
                 {/* Order of the routes is important in the below code. This is because the id in /:id can be same with 'new-post'. */}
                 <Switch>
-                    {this.state.auth ? <Route path="/new-post" exact component={NewPost} /> : null}
-                    <Route path="/posts" component={Posts} />
+                    {this.state.auth ? <Route path="/new-post" exact component={AsyncNewPost} /> : null}
+                    <Route render={() => <h1>Not Found</h1>}/>
+                    {/* <Route path="/posts" component={Posts} /> */}
                     <Redirect from="/" to="/posts" />
                 </Switch>
             </div>
